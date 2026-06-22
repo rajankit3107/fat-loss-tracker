@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model DailyLog {
+  id        String   @id @default(cuid())
+  date      DateTime @unique @db.Date
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Checklist items
+  hitCalorieTarget  Boolean @default(false)
+  hitProteinGoal    Boolean @default(false)
+  trainedToday      Boolean @default(false)
+  hitStepGoal       Boolean @default(false)
+  drankEnoughWater  Boolean @default(false)
+  loggedFood        Boolean @default(false)
+  sleptEnough       Boolean @default(false)
+  tookWeightAverage Boolean @default(false)
+
+  // Detailed data
+  caloriesConsumed Int?
+  proteinGrams     Int?
+  carbsGrams       Int?
+  fatsGrams        Int?
+  steps            Int?
+  waterLitres      Float?
+  sleepHours       Float?
+  weightKg         Float?
+
+  // Training
+  trainingType     String?
+  trainingDuration Int?
+  cardioType       String?
+  cardioDuration   Int?
+
+  // Mood & Energy
+  energyLevel      Int?
+  hungerLevel      Int?
+  moodRating       Int?
+
+  // Notes
+  notes            String?
+
+  // Month tracking
+  currentMonth     Int?
+  targetCalories   Int?
+}
